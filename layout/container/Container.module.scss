@@ -1,0 +1,10 @@
+.ic__container {
+  width: 100%;
+  padding: 0 20px;
+  max-width: 1280px;
+  margin-right: auto;
+  margin-left: auto;
+  &__narrow {
+    max-width: 1040px;
+  }
+}

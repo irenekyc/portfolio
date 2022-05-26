@@ -1,5 +1,8 @@
+@import '../../styles/variables';
+
 .ic__heading {
   font-family: sans-serif;
+
   &__h1 {
     font-size: 28px;
     font-weight: 500;
@@ -21,7 +24,7 @@
     font-weight: 500;
   }
   &__primary {
-    color: purple;
+    color: $primary-purple;
   }
   &__secondary {
     color: white;

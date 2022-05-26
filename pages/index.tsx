@@ -1,14 +1,20 @@
 import type { NextPage } from 'next'
-import Heading from '../components/heading'
-import Button from '../components/button'
-import { BUTTON_VARIANT_OUTLINE } from '../constants/button'
+
+import Hero from '../widgets/hero'
+import Skills from '../widgets/skills'
+import Projects from '../widgets/projects'
+import Contact from '../widgets/contact'
+import Libraries from '../widgets/libraries'
 
 const Home: NextPage = () => {
 	return (
-		<div>
-			<Heading heading={1}>Hello World</Heading>
-			<Button variant={BUTTON_VARIANT_OUTLINE}>Outline</Button>
-		</div>
+		<>
+			<Hero />
+			<Skills />
+			<Libraries />
+			<Projects />
+			<Contact />
+		</>
 	)
 }
 

@@ -6,16 +6,18 @@ import styles from './Heading.module.scss'
 interface HeadingProps {
   heading: 1 | 2 | 3 | 4 | 5;
   children: ReactNode | string;
-  variant?: typeof VARIANT_PRIMARY | typeof VARIANT_SECONDARY;
+	variant?: typeof VARIANT_PRIMARY | typeof VARIANT_SECONDARY;
+	className?:string
 }
 
 const Heading: FunctionComponent<HeadingProps> = ({
 	heading,
 	children,
 	variant = VARIANT_PRIMARY,
+	className,
 	...props
 }: HeadingProps) => {
-	const classNames = classnames(styles.ic__heading, {
+	const classNames = classnames(className, styles.ic__heading, {
 		[styles.ic__heading__h1]: heading === 1,
 		[styles.ic__heading__h2]: heading === 2,
 		[styles.ic__heading__h3]: heading === 3,
@@ -64,6 +66,10 @@ const Heading: FunctionComponent<HeadingProps> = ({
 			{children}
 		</span>
 	)
+}
+
+Heading.defaultProps={
+	className:''
 }
 
 export default Heading

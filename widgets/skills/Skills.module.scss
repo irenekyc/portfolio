@@ -1,0 +1,50 @@
+@import '../../styles/variables.scss';
+
+.ic__skills {
+  background: $primary-dark;
+  color: $primary-purple;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &__row {
+    display: flex;
+    width: 100%;
+    margin: 40px 0;
+  }
+
+  &__content {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    flex: 1;
+    height: 50vh;
+    max-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &:nth-child(odd) {
+      background: rgba(#7a04eb, 0.25);
+    }
+    &:nth-child(even) {
+      background: rgba(#7a04eb, 0.1);
+    }
+
+    &__logo {
+      width: 70%;
+      margin-right: auto;
+      margin-left: auto;
+      height: 180px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__heading {
+      margin-top: 30px;
+      font-size: 40px;
+    }
+  }
+}
