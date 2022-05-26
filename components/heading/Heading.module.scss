@@ -1,0 +1,29 @@
+.ic__heading {
+  font-family: sans-serif;
+  &__h1 {
+    font-size: 28px;
+    font-weight: 500;
+  }
+  &__h2 {
+    font-size: 24px;
+    font-weight: 500;
+  }
+  &__h3 {
+    font-size: 21px;
+    font-weight: 500;
+  }
+  &__h4 {
+    font-size: 18px;
+    font-weight: 400;
+  }
+  &__h5 {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  &__primary {
+    color: purple;
+  }
+  &__secondary {
+    color: white;
+  }
+}
