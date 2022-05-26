@@ -2,16 +2,13 @@ import { FunctionComponent} from 'react'
 import Image from 'next/image'
 import Section from '../../layout/section'
 import Container from '../../layout/container'
-
-
 import styles from './Skills.module.scss'
 import Heading from '../../components/heading'
-import { VARIANT_SECONDARY, VARIANT_PRIMARY } from '../../constants/theme'
 
 const Skills:FunctionComponent = ()=>{
   return <Section className={styles.ic__skills}>
     <Container>
-      <Heading className={styles.ic__skills__heading} heading={2}>I am specialised in</Heading>
+      <Heading className={styles.ic__skills__heading} heading={2}>Specialised in</Heading>
       <div className={styles.ic__skills__row}>
         <div className={styles.ic__skills__content}>
           <div className={styles.ic__skills__content__logo}>
