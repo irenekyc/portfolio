@@ -8,7 +8,7 @@
     "start": "next start",
     "format": "prettier --write **/*.ts{,x} **/*.s[ac]ss",
     "lint": "next lint --fix",
-    "test": "jest --watch",
+    "test": "jest --watch=false",
     "prepare": "husky install"
   },
   "dependencies": {
