@@ -7,10 +7,10 @@ interface ContainerProps{
   isNarrow?: boolean
 }
 
-const Container:FunctionComponent<ContainerProps> = ({children, isNarrow}:ContainerProps)=>{
+const Container:FunctionComponent<ContainerProps> = ({children, isNarrow, ...props}:ContainerProps)=>{
   return <div className={classnames(styles.ic__container,{
     [styles.ic__container__isNarrow]: isNarrow
-  })}>
+  })} {...props}>
     {children}
   </div>
 }
