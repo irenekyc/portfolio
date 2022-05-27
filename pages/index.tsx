@@ -7,15 +7,15 @@ import Contact from '../widgets/contact'
 import Libraries from '../widgets/libraries'
 
 const Home: NextPage = () => {
-	return (
-		<>
-			<Hero />
-			<Skills />
-			<Libraries />
-			<Projects />
-			<Contact />
-		</>
-	)
+  return (
+    <>
+      <Hero />
+      <Skills />
+      <Libraries />
+      <Projects />
+      <Contact />
+    </>
+  )
 }
 
 export default Home

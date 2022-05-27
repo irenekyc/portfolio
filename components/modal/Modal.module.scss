@@ -1,0 +1,30 @@
+.ic__modal {
+  &__dialog {
+    width: 85vw;
+    max-width: 990px;
+  }
+  &__closeIcon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    outline: none;
+    background: transparent;
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+  &__content {
+    &__wrapper {
+      height: 85vh;
+      max-height: 600px;
+      position: relative;
+    }
+  }
+}
