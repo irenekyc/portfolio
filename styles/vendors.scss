@@ -1,1 +1,16 @@
 @import '~bootstrap/scss/bootstrap';
+@import '~swiper/css';
+@import '~swiper/css/pagination';
+
+.swiper-pagination-bullets {
+  left: 10px;
+}
+
+.swiper-pagination-bullet {
+  background: white;
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background: $primary-purple;
+}
