@@ -1,0 +1,40 @@
+.ic__attributions {
+  &__button {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 9999;
+    display: flex;
+    height: 21px;
+    &__chevron {
+      transition: all 0.6s ease-in-out;
+    }
+    &__chevronActive {
+      transform: translateX(-10px) rotate(180deg);
+    }
+    svg {
+      margin-top: -2px;
+      height: 12px;
+      margin-right: 7px;
+    }
+  }
+
+  &__content {
+    padding-left: 20px;
+    position: fixed;
+    width: 100vw;
+    left: 100vw;
+    bottom: 0;
+    background: white;
+    z-index: 1000;
+    transition: all 1s ease-in-out;
+    span {
+      margin-right: 10px;
+      font-size: 14px;
+      line-height: 21px;
+    }
+  }
+  &__contentActive {
+    transform: translate(-100vw);
+  }
+}

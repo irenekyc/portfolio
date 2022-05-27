@@ -17,3 +17,19 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.ic-main {
+  background: url('/assets/hero-1.jpg');
+  background-size: contain;
+  background-position: center;
+  position: relative;
+  &:after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    content: '';
+    background: rgba($primary-dark, 0.5);
+  }
+}

@@ -1,5 +1,19 @@
 @import '../../styles/variables.scss';
 
 .ic__libraries {
-  background: $primary-dark;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__bubblesRow {
+    margin: 2rem 0;
+  }
+
+  &__bubbleWrapper {
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+  }
 }

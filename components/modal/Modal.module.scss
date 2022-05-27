@@ -1,4 +1,7 @@
 .ic__modal {
+  &__dialogAuto {
+    width: auto;
+  }
   &__dialog {
     width: 85vw;
     max-width: 990px;
@@ -25,6 +28,9 @@
       height: 85vh;
       max-height: 600px;
       position: relative;
+    }
+    &__wrapperAuto {
+      height: auto;
     }
   }
 }

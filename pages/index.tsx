@@ -8,10 +8,11 @@ import Libraries from '../widgets/libraries'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Mousewheel, Pagination } from 'swiper'
+import Attributions from '../widgets/attributions'
 
 const Home: NextPage = () => {
 	return (
-		<>
+		<div className='ic-main'>
 			<Swiper
 				modules={[Mousewheel, Pagination]}
 				pagination={{ clickable: true }}
@@ -36,7 +37,8 @@ const Home: NextPage = () => {
 				</SwiperSlide>
 			</Swiper>
 			<Contact />
-		</>
+			<Attributions />
+		</div>
 	)
 }
 

@@ -1,0 +1,41 @@
+@import '../../styles/variables';
+
+.ic__hero {
+  position: relative;
+
+  &__main {
+    height: 150vw;
+    border-radius: 100%;
+    background: rgba($primary-dark, 0.65);
+    position: absolute;
+    width: 150vw;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+
+    &__content {
+      width: 50vw;
+      height: auto;
+      margin-top: 5vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+
+      &__row {
+        display: flex;
+
+        justify-content: flex-start;
+        align-items: center;
+      }
+      &__country {
+        svg {
+          width: 100px;
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+}
