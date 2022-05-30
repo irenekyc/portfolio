@@ -6,68 +6,41 @@ import Heading from '../../components/heading'
 
 import {
   ProjectDetailsType,
-  LibraryDateType,
+  LibraryDataType,
 } from '../../typings/ProjectDetails'
 import Button from '../../components/button'
+import axios from 'axios'
 
 interface ProjectDetailsProps {
   isOpen: boolean
   closeModal: () => void
-  projectName: string | undefined
+  projectDetails: ProjectDetailsType | undefined
 }
 
 const ProjectDetails: FunctionComponent<ProjectDetailsProps> = ({
   isOpen,
   closeModal,
-  projectName,
+  projectDetails,
   ...props
 }: ProjectDetailsProps) => {
-  const [projectDetails, setProjectDetails] = useState<
-    undefined | ProjectDetailsType
-  >(undefined)
+  const [librariesLogo, setLibrariesLogo] = useState<LibraryDataType[]>([])
+
+  const fetchLibraiesLogo = async (libraries: string[]) => {
+    const librariesQuery = libraries
+      .join('+')
+      .toLowerCase()
+      .replaceAll(' ', '-')
+    const res = await axios.get(
+      `http://localhost:3000/api/libraries?title=${librariesQuery}`
+    )
+    setLibrariesLogo(res.data.libraries)
+  }
   useEffect(() => {
-    if (!projectName) return
-    setProjectDetails({
-      images: {
-        thumbnail: '/assets/projects/renoon/renoon-thumbnail.png',
-        mobile: '/assets/projects/renoon/renoon-mobile.png',
-        desktop: '/assets/projects/renoon/renoon-2.png',
-      },
-      title: 'Renoon',
-      description:
-        'Renoon is a Amsterdam based Startup specializing in sustainable fashion. Renoon is a marketplace for sustainable fashion brands to reach wider customer bases. In 2020, they possess over 600 sustainable fashion brand partners and 1,200 active listed products.',
-      libraries: [
-        { title: 'NextJs', image: '/assets/icons/nextjs-black.svg' },
-        { title: 'Redux', image: '/assets/icons/redux.svg' },
-        { title: 'Auth0', image: '/assets/icons/libraries/auth0-icon.svg' },
-        {
-          title: 'Styled components',
-          image: '/assets/icons/libraries/styled-components-black.svg',
-        },
-        { title: 'Agolia', image: '/assets/icons/libraries/algolia-3.svg' },
-        {
-          title: 'Mailchimp',
-          image: '/assets/icons/libraries/mailchimp-black.png',
-        },
-        {
-          title: 'GTM',
-          image: '/assets/icons/libraries/google-tag-manager.svg',
-        },
-        {
-          title: 'Google Analytics',
-          image: '/assets/icons/libraries/google-analytics-4.svg',
-        },
-        {
-          title: 'Cypress',
-          image: '/assets/icons/libraries/cypress-black.png',
-        },
-        { title: 'Mixpanel', image: '/assets/icons/libraries/mixpanel.svg' },
-      ],
-      liveWebsite: undefined,
-      industry: 'Ecommerce',
-    })
-  }, [projectName])
-  if (!projectName) return null
+    if (!projectDetails) return
+
+    fetchLibraiesLogo(projectDetails.libraries)
+  }, [projectDetails])
+
   return (
     <Modal isOpen={isOpen} closeModal={closeModal} {...props}>
       <div className={styles.ic__projectDetails}>
@@ -123,16 +96,16 @@ const ProjectDetails: FunctionComponent<ProjectDetailsProps> = ({
                 <strong>Description:</strong> {projectDetails.description}
               </p>
               <div>
-                <strong>Libraries:</strong>
+                <strong>Tech Stacks:</strong>
                 <ul
                   className={
                     styles.ic__projectDetails__descriptions__librariesRow
                   }
                 >
-                  {projectDetails.libraries.map((library: LibraryDateType) => (
-                    <li>
+                  {librariesLogo.map((library: LibraryDataType) => (
+                    <li key={library.title}>
                       <Image
-                        src={library.image}
+                        src={library.image.black as string}
                         alt={library.title}
                         layout='fill'
                         objectFit='contain'

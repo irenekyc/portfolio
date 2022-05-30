@@ -7,13 +7,30 @@ import Bubble from '../../components/bubble'
 import {
   BUBBLE_COLOR_SECONDARY,
   BUBBLE_SIZE_LARGE,
+  BUBBLE_COLOR_PRIMARY,
+  BUBBLE_SIZE_MEDIUM,
 } from '../../constants/bubble'
 import Image from 'next/image'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper'
+import { LibraryDataType } from '../../typings/ProjectDetails'
 
-const Libraries: FunctionComponent = () => {
+const logoBackgroundPurpleList = [
+  'Styled Components',
+  'Mailchimp',
+  'Cypress',
+  'Google Tag Manager',
+  'React i18n',
+]
+
+interface LibrariesProps {
+  data: LibraryDataType[]
+}
+
+const Libraries: FunctionComponent<LibrariesProps> = ({
+  data,
+}: LibrariesProps) => {
   return (
     <Section className={styles.ic__libraries}>
       <Container>
@@ -34,16 +51,29 @@ const Libraries: FunctionComponent = () => {
             },
           }}
         >
-          <SwiperSlide className={styles.ic__libraries__bubbleWrapper}>
-            <Bubble color={BUBBLE_COLOR_SECONDARY} size={BUBBLE_SIZE_LARGE}>
-              <Image
-                src='/assets/icons/libraries/algolia-3.svg'
-                alt=''
-                layout='fill'
-                objectFit='contain'
-              />
-            </Bubble>
-          </SwiperSlide>
+          {data.map((library: LibraryDataType, index: number) => (
+            <SwiperSlide
+              className={styles.ic__libraries__bubbleWrapper}
+              key={library.title}
+            >
+              <Bubble
+                color={
+                  logoBackgroundPurpleList.includes(library.title)
+                    ? BUBBLE_COLOR_PRIMARY
+                    : BUBBLE_COLOR_SECONDARY
+                }
+                size={index % 3 === 1 ? BUBBLE_SIZE_LARGE : BUBBLE_SIZE_MEDIUM}
+              >
+                <Image
+                  src={library.image.white as string}
+                  alt={library.title}
+                  layout='fill'
+                  objectFit='contain'
+                />
+              </Bubble>
+            </SwiperSlide>
+          ))}
+          {/* 
           <SwiperSlide className={styles.ic__libraries__bubbleWrapper}>
             <Bubble color={BUBBLE_COLOR_SECONDARY}>
               <Image
@@ -195,7 +225,7 @@ const Libraries: FunctionComponent = () => {
                 objectFit='contain'
               />
             </Bubble>
-          </SwiperSlide>
+          </SwiperSlide> */}
         </Swiper>
       </Container>
     </Section>

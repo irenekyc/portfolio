@@ -6,17 +6,31 @@ import styles from './Projects.module.scss'
 import Image from 'next/image'
 import ProjectDetails from '../project-details'
 import Button from '../../components/button'
+import {
+  ProjectDetailsType,
+  ProjectLanguageType,
+} from '../../typings/ProjectDetails'
 
-const Projects: FunctionComponent = () => {
+interface ProjectsProps {
+  projects: ProjectDetailsType[]
+}
+
+const Projects: FunctionComponent<ProjectsProps> = ({
+  projects,
+}: ProjectsProps) => {
   const [openProjectModal, setOpenProjectModal] = useState<boolean>(false)
   const [projectModalDetails, setProjectModalDetails] = useState<
-    undefined | string
+    undefined | ProjectDetailsType
   >(undefined)
   const openProjectDetailsModal = (e: MouseEvent<HTMLButtonElement>) => {
     const target = e.currentTarget as HTMLButtonElement
-    const project = target.getAttribute('data-modal-open') || undefined
+    const projectId = target.getAttribute('data-modal-open') || undefined
     setOpenProjectModal(true)
-    setProjectModalDetails(project)
+    setProjectModalDetails(
+      projects.filter(
+        (project: ProjectDetailsType) => project.id === projectId
+      )[0]
+    )
   }
 
   const closeProjectModal = () => {
@@ -24,129 +38,76 @@ const Projects: FunctionComponent = () => {
     setProjectModalDetails(undefined)
   }
 
+  const renderLanguageLogo = (language: ProjectLanguageType): JSX.Element => {
+    switch (language) {
+      case 'typescript':
+        return (
+          <Image
+            src='/assets/icons/typescript.svg'
+            alt='typescript'
+            height='36'
+            width='36'
+          />
+        )
+      case 'javascript':
+        return (
+          <Image
+            src='/assets/icons/logo-javascript.svg'
+            alt='javascript'
+            height='36'
+            width='36'
+          />
+        )
+      default:
+        return <></>
+    }
+  }
+
+  if (!projects) return null
+
   return (
     <>
       <ProjectDetails
         isOpen={openProjectModal}
         closeModal={closeProjectModal}
-        projectName={projectModalDetails}
+        projectDetails={projectModalDetails}
       />
       <Section className={styles.ic__projects}>
         <Container>
           <Heading heading={2}>Projects</Heading>
           <div className={styles.ic__projects__row}>
-            <div className={styles.ic__projects__projectItem}>
-              <button
-                className={styles.ic__projects__projectItem__card}
-                data-modal-open='renoon'
-                onClick={openProjectDetailsModal}
+            {projects.map((project: ProjectDetailsType) => (
+              <div
+                className={styles.ic__projects__projectItem}
+                key={project.id}
               >
-                <div
-                  className={styles.ic__projects__projectItem__card__helperIcon}
+                <button
+                  className={styles.ic__projects__projectItem__card}
+                  data-modal-open={project.id}
+                  onClick={openProjectDetailsModal}
                 >
-                  <Image
-                    src='/assets/icons/logo-javascript.svg'
-                    alt='react'
-                    height='36'
-                    width='36'
-                  />
-                </div>
-                <div
-                  className={styles.ic__projects__projectItem__card__thumbnail}
-                >
-                  <Image
-                    src='/assets/projects/renoon/renoon-thumbnail.png'
-                    objectFit='cover'
-                    layout='fill'
-                    alt='renoon'
-                  />
-                </div>
-              </button>
-            </div>
-            <div className={styles.ic__projects__projectItem}>
-              <button
-                className={styles.ic__projects__projectItem__card}
-                data-modal-open='renoon'
-                onClick={openProjectDetailsModal}
-              >
-                <div
-                  className={styles.ic__projects__projectItem__card__helperIcon}
-                >
-                  <Image
-                    src='/assets/icons/typescript.svg'
-                    alt='react'
-                    height='36'
-                    width='36'
-                  />
-                </div>
-                <div
-                  className={styles.ic__projects__projectItem__card__thumbnail}
-                >
-                  <Image
-                    src='/assets/projects/project-2/project2-thumbnail.png'
-                    objectFit='cover'
-                    layout='fill'
-                    alt='project2'
-                  />
-                </div>
-              </button>
-            </div>
-            <div className={styles.ic__projects__projectItem}>
-              <button
-                className={styles.ic__projects__projectItem__card}
-                data-modal-open='renoon'
-                onClick={openProjectDetailsModal}
-              >
-                <div
-                  className={styles.ic__projects__projectItem__card__helperIcon}
-                >
-                  <Image
-                    src='/assets/icons/logo-javascript.svg'
-                    alt='react'
-                    height='36'
-                    width='36'
-                  />
-                </div>
-                <div
-                  className={styles.ic__projects__projectItem__card__thumbnail}
-                >
-                  <Image
-                    src='/assets/projects/GoTyme/gotyme-thumbnail.png'
-                    objectFit='cover'
-                    layout='fill'
-                    alt='project2'
-                  />
-                </div>
-              </button>
-            </div>
-            <div className={styles.ic__projects__projectItem}>
-              <button
-                className={styles.ic__projects__projectItem__card}
-                data-modal-open='renoon'
-                onClick={openProjectDetailsModal}
-              >
-                <div
-                  className={styles.ic__projects__projectItem__card__helperIcon}
-                >
-                  <Image
-                    src='/assets/icons/typescript.svg'
-                    alt='react'
-                    height='36'
-                    width='36'
-                  />
-                </div>
-                <div
-                  className={styles.ic__projects__projectItem__card__thumbnail}
-                >
-                  <Image
-                    src='/assets/projects/sino/sino-thumbnail.png'
-                    objectFit='cover'
-                    layout='fill'
-                    alt='project2'
-                  />
-                </div>
-              </button>
-            </div>
+                  <div
+                    className={
+                      styles.ic__projects__projectItem__card__helperIcon
+                    }
+                  >
+                    {renderLanguageLogo(project.language)}
+                  </div>
+                  <div
+                    className={
+                      styles.ic__projects__projectItem__card__thumbnail
+                    }
+                  >
+                    <Image
+                      src={project.images.thumbnail}
+                      objectFit='cover'
+                      layout='fill'
+                      alt={project.id}
+                    />
+                  </div>
+                </button>
+              </div>
+            ))}
           </div>
           <Button>Understand more</Button>
         </Container>
