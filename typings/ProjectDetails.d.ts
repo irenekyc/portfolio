@@ -6,7 +6,12 @@ export type ProjectDetailsType = {
   }
   title: string
   description: string
-  libraries: string[]
+  libraries: LibraryDateType[]
   liveWebsite: undefined | string
   industry: string
+}
+
+export type LibraryDateType = {
+  title: string
+  image: string
 }

@@ -1,2 +1,20 @@
 $primary-purple: #ff00a0;
 $primary-dark: #120458;
+
+@mixin tablet {
+  @media screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media screen and (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: 1280px) {
+    @content;
+  }
+}

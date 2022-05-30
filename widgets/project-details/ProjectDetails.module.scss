@@ -1,9 +1,14 @@
+@import '../../styles/variables.scss';
+
 .ic__projectDetails {
   height: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
   width: 100%;
+  strong {
+    margin-right: 0.25rem;
+  }
   p {
     margin: 0;
   }
@@ -16,7 +21,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     &__desktop {
-      width: 65%;
+      width: 95%;
       max-width: 500px;
       &__wrapper {
         overflow: hidden;
@@ -43,9 +48,60 @@
 
   &__title {
     width: 100%;
+    margin-bottom: 1rem;
   }
   &__descriptions {
     flex: 1;
     height: auto;
+    max-width: 100%;
+    p {
+      white-space: pre-wrap;
+      margin-bottom: 1rem;
+    }
+
+    &__librariesRow {
+      width: 100%;
+      display: inline-flex;
+      flex-wrap: wrap;
+      list-style: none;
+      padding-left: 0;
+      justify-content: flex-start;
+
+      li {
+        margin-right: 12px;
+        margin-bottom: 12px;
+        height: 60px;
+        width: 60px;
+        position: relative;
+      }
+    }
+  }
+
+  @include laptop {
+    &__descriptions {
+      max-width: 800px;
+      margin-top: 1rem;
+    }
+  }
+  @include desktop {
+    &__images {
+      width: 65%;
+    }
+    &__title {
+      width: 35%;
+      padding-left: 2rem;
+      position: relative;
+      height: auto;
+      align-self: flex-end;
+      &:after {
+        position: absolute;
+        content: '';
+        height: 100%;
+        width: 1px;
+        top: 0;
+        left: 1rem;
+        background: lightgray;
+      }
+    }
   }
 }

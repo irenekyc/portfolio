@@ -12,14 +12,13 @@
     display: flex;
     width: 100%;
     margin: 40px 0;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   &__content {
-    padding-top: 30px;
-    padding-bottom: 30px;
-    flex: 1;
-    height: 50vh;
-    max-height: 300px;
+    width: 30%;
+    height: 30vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -45,6 +44,19 @@
     &__heading {
       margin-top: 30px;
       font-size: 40px;
+    }
+  }
+
+  @include laptop {
+    &__row {
+      flex-wrap: nowrap;
+    }
+    &__content {
+      flex: 1;
+      height: 50vh;
+      max-height: 20vw;
+      padding-top: 30px;
+      padding-bottom: 30px;
     }
   }
 }

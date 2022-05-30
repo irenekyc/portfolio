@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .ic__container {
   width: 100%;
   padding: 0 20px;
@@ -6,5 +8,14 @@
   margin-left: auto;
   &__narrow {
     max-width: 1040px;
+  }
+
+  @include tablet {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  @include laptop {
+    padding-left: 80px;
+    padding-right: 80px;
   }
 }
