@@ -18,8 +18,8 @@ interface HomePageProps {
 }
 
 export async function getServerSideProps() {
-	const projectRes = await axios.get('http://localhost:3000/api/projects')
-	const libraryRes = await axios.get('http://localhost:3000/api/libraries')
+	const projectRes = await axios.get(`${process.env.BASE_URL}/api/projects`)
+	const libraryRes = await axios.get(`${process.env.BASE_URL}/api/libraries`)
 
 	return {
 		props: {

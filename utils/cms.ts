@@ -1,21 +1,61 @@
-import { GoogleSpreadsheet } from 'google-spreadsheet'
-import creds from '../config/cred.json'
+import {
+  GoogleSpreadsheet,
+  ServiceAccountCredentials,
+} from 'google-spreadsheet'
+
 import {
   ProjectDetailsType,
   ProjectLanguageType,
 } from '../typings/ProjectDetails'
 
-// const creds = require('../config/cred.json') // the file saved above
+type CredentialType = {
+  type: string | undefined
+  project_id: string | undefined
+  private_key_id: string | undefined
+  private_key: string | undefined
+  client_email: string | undefined
+  client_id: string | undefined
+  auth_uri: string | undefined
+  token_uri: string | undefined
+  auth_provider_x509_cert_url: string | undefined
+  client_x509_cert_url: string | undefined
+}
+
+const createCreds = (): CredentialType | undefined => {
+  let creds: CredentialType = {
+    type: process.env.GOOGLE_CREDENTIAL_TYPE,
+    project_id: process.env.GOOGLE_CREDENTIAL_PROJECT_ID,
+    private_key_id: process.env.GOOGLE_CREDENTIAL_PRIVATE_KEY_ID,
+    private_key: JSON.parse(
+      process.env.GOOGLE_CREDENTIAL_PRIVATE_KEY || '{ privateKey: null }'
+    ).privateKey,
+    client_email: process.env.GOOGLE_CREDENTIAL_CLIENT_EMAIL,
+    client_id: process.env.GOOGLE_CREDENTIAL_CLIENT_ID,
+    auth_uri: process.env.GOOGLE_CREDENTIAL_AUTH_URI,
+    token_uri: process.env.GOOGLE_CREDENTIAL_TOKEN_URI,
+    auth_provider_x509_cert_url:
+      process.env.GOOGLE_CREDENTIAL_AUTH_PROVIDER_X509_CERT_URL,
+    client_x509_cert_url: process.env.GOOGLE_CREDENTIAL_CLIENT_X509_CERT_URL,
+  }
+
+  const hasUndefined = Object.values(creds).filter(
+    (credValue) => credValue === undefined
+  )
+  if (hasUndefined.length > 0) {
+    return undefined
+  } else {
+    return creds
+  }
+}
 
 const fetchGoogle = async (): Promise<ProjectDetailsType[] | undefined> => {
   const projectsSheetId = process.env.GOOGLE_PROJECTS_SHEET_ID
   let projects: ProjectDetailsType[] = []
-
-  if (!projectsSheetId) return undefined
+  const creds = createCreds()
+  if (!projectsSheetId || !creds) return undefined
 
   const doc = new GoogleSpreadsheet(projectsSheetId)
-
-  await doc.useServiceAccountAuth(creds)
+  await doc.useServiceAccountAuth(creds as ServiceAccountCredentials)
 
   await doc.loadInfo()
   const sheet = doc.sheetsByIndex[0]

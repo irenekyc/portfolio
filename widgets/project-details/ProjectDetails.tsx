@@ -31,9 +31,9 @@ const ProjectDetails: FunctionComponent<ProjectDetailsProps> = ({
       .join('+')
       .toLowerCase()
       .replaceAll(' ', '-')
-    const res = await axios.get(
-      `http://localhost:3000/api/libraries?title=${librariesQuery}`
-    )
+    const res = await axios.get(`${process.env.BASE_URL}/api/libraries`, {
+      params: { title: librariesQuery },
+    })
     setLibrariesLogo(res.data.libraries)
   }
   useEffect(() => {
