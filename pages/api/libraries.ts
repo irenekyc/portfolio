@@ -8,8 +8,8 @@ const allLibraries: LibraryDataType[] = [
 		libraryFeatured: false,
 		title: 'Next Js',
 		image: {
-			black: '/assets/icons/nexjs-black.svg',
-			white: '/assets/icons/nexjs.svg',
+			black: '/assets/icons/nextjs-black.svg',
+			white: '/assets/icons/nextjs.svg',
 		},
 	},
 	{

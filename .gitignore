@@ -37,3 +37,6 @@ yarn-error.log*
 
 #local settings
 .vscode/
+
+# config file
+/config

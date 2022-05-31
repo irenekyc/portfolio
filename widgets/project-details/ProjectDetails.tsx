@@ -26,6 +26,7 @@ const ProjectDetails: FunctionComponent<ProjectDetailsProps> = ({
   const [librariesLogo, setLibrariesLogo] = useState<LibraryDataType[]>([])
 
   const fetchLibraiesLogo = async (libraries: string[]) => {
+    if (libraries.length === 0) return
     const librariesQuery = libraries
       .join('+')
       .toLowerCase()
