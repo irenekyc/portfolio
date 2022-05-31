@@ -1,0 +1,12 @@
+.ic__dataError {
+  width: 100%;
+  max-width: 560px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+
+  &__contact {
+    color: white;
+    text-decoration: underline;
+  }
+}

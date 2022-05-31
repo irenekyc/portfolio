@@ -225,10 +225,22 @@ type Data = {
   libraries: LibraryDataType[]
 }
 
+type Error = {
+  error: string
+}
+
 export default function handler(
 	req: NextApiRequest,
-	res: NextApiResponse<Data>
+	res: NextApiResponse<Data | Error>
 ) {
+	if (
+		req.headers.authorization?.replace('Bearer ', '') !==
+    process.env.API_SECRECT
+	) {
+		return res.status(401).json({
+			error: 'Unauthorized',
+		})
+	}
 	if (req.query && req.query.title) {
 		const titles = req.query.title as string
 		const titlesArr: string[] = titles.split(' ')

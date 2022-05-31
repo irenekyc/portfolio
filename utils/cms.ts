@@ -63,7 +63,9 @@ const fetchGoogle = async (): Promise<ProjectDetailsType[] | undefined> => {
   const rows = await sheet.getRows()
   rows.forEach((row) => {
     const libraries: string[] = Object.entries(row)
-      .filter(([key, value]) => key.includes('library') && value !== undefined)
+      .filter(
+        ([key, value]) => key.includes('library') && value !== 'undefined'
+      )
       .map(([_, value]) => value)
 
     projects.push({

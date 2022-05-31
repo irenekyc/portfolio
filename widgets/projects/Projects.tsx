@@ -10,13 +10,16 @@ import {
   ProjectDetailsType,
   ProjectLanguageType,
 } from '../../typings/ProjectDetails'
+import DataErrorMessage from '../../components/data-error-message'
 
 interface ProjectsProps {
   projects: ProjectDetailsType[]
+  dataError: boolean
 }
 
 const Projects: FunctionComponent<ProjectsProps> = ({
   projects,
+  dataError,
 }: ProjectsProps) => {
   const [openProjectModal, setOpenProjectModal] = useState<boolean>(false)
   const [projectModalDetails, setProjectModalDetails] = useState<
@@ -63,7 +66,15 @@ const Projects: FunctionComponent<ProjectsProps> = ({
     }
   }
 
-  if (!projects) return null
+  if (projects.length === 0 && dataError) {
+    return (
+      <Section className={styles.ic__projects}>
+        <Container>
+          <DataErrorMessage />
+        </Container>
+      </Section>
+    )
+  }
 
   return (
     <>

@@ -31,9 +31,16 @@ const ProjectDetails: FunctionComponent<ProjectDetailsProps> = ({
       .join('+')
       .toLowerCase()
       .replaceAll(' ', '-')
-    const res = await axios.get(`${process.env.BASE_URL}/api/libraries`, {
-      params: { title: librariesQuery },
-    })
+
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_HOST}/api/libraries?title=${librariesQuery}`,
+      {
+        headers: {
+          Authorization: 'Bearer ' + process.env.NEXT_PUBLIC_API_SECRET,
+        },
+      }
+    )
+
     setLibrariesLogo(res.data.libraries)
   }
   useEffect(() => {
@@ -96,25 +103,27 @@ const ProjectDetails: FunctionComponent<ProjectDetailsProps> = ({
               <p>
                 <strong>Description:</strong> {projectDetails.description}
               </p>
-              <div>
-                <strong>Tech Stacks:</strong>
-                <ul
-                  className={
-                    styles.ic__projectDetails__descriptions__librariesRow
-                  }
-                >
-                  {librariesLogo.map((library: LibraryDataType) => (
-                    <li key={library.title}>
-                      <Image
-                        src={library.image.black as string}
-                        alt={library.title}
-                        layout='fill'
-                        objectFit='contain'
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {librariesLogo.length > 0 && (
+                <div>
+                  <strong>Tech Stacks:</strong>
+                  <ul
+                    className={
+                      styles.ic__projectDetails__descriptions__librariesRow
+                    }
+                  >
+                    {librariesLogo.map((library: LibraryDataType) => (
+                      <li key={library.title}>
+                        <Image
+                          src={library.image.black as string}
+                          alt={library.title}
+                          layout='fill'
+                          objectFit='contain'
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </>
         )}

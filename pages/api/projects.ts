@@ -7,10 +7,21 @@ type Data = {
   projects: ProjectDetailsType[]
 }
 
+type Error = {
+  error: string
+}
 export default async function handler(
 	req: NextApiRequest,
-	res: NextApiResponse<Data>
+	res: NextApiResponse<Data | Error>
 ) {
+	if (
+		req.headers.authorization?.replace('Bearer ', '') !==
+    process.env.API_SECRECT
+	) {
+		return res.status(401).json({
+			error: 'Unauthorized',
+		})
+	}
 	let allProjects: ProjectDetailsType[] = []
 	const projects = await fetchGoogle()
 	if (projects) {

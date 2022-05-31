@@ -15,16 +15,43 @@ import { LibraryDataType, ProjectDetailsType } from '../typings/ProjectDetails'
 interface HomePageProps {
   libraries: LibraryDataType[]
   projects: ProjectDetailsType[]
+  dataError: boolean
 }
 
 export async function getServerSideProps() {
-	const projectRes = await axios.get(`${process.env.BASE_URL}/api/projects`)
-	const libraryRes = await axios.get(`${process.env.BASE_URL}/api/libraries`)
+	let projects: ProjectDetailsType[] = []
+	let libraries: LibraryDataType[] = []
+	let dataError = false
+	try {
+		const projectRes = await axios.get(`${process.env.BASE_URL}/api/projects`, {
+			headers: {
+				Authorization: 'Bearer ' + process.env.API_SECRECT,
+			},
+		})
+		projects = projectRes.data.projects
+	} catch {
+		dataError = true
+	}
+
+	try {
+		const libraryRes = await axios.get(
+			`${process.env.BASE_URL}/api/libraries`,
+			{
+				headers: {
+					Authorization: 'Bearer ' + process.env.API_SECRECT,
+				},
+			}
+		)
+		libraries = libraryRes.data.libraries
+	} catch {
+		dataError = true
+	}
 
 	return {
 		props: {
-			libraries: libraryRes.data.libraries,
-			projects: projectRes.data.projects,
+			libraries,
+			projects,
+			dataError,
 		},
 	}
 }
@@ -32,6 +59,7 @@ export async function getServerSideProps() {
 const Home: NextPage<HomePageProps> = ({
 	libraries,
 	projects,
+	dataError,
 }: HomePageProps) => {
 	return (
 		<div className='ic-main'>
@@ -52,10 +80,10 @@ const Home: NextPage<HomePageProps> = ({
 				</SwiperSlide>
 
 				<SwiperSlide>
-					<Libraries data={libraries} />
+					<Libraries data={libraries} dataError={dataError} />
 				</SwiperSlide>
 				<SwiperSlide>
-					<Projects projects={projects} />
+					<Projects projects={projects} dataError={dataError} />
 				</SwiperSlide>
 			</Swiper>
 			<Contact />

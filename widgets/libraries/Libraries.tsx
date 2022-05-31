@@ -15,6 +15,7 @@ import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper'
 import { LibraryDataType } from '../../typings/ProjectDetails'
+import DataErrorMessage from '../../components/data-error-message'
 
 const logoBackgroundPurpleList = [
   'Styled Components',
@@ -26,11 +27,22 @@ const logoBackgroundPurpleList = [
 
 interface LibrariesProps {
   data: LibraryDataType[]
+  dataError: boolean
 }
 
 const Libraries: FunctionComponent<LibrariesProps> = ({
   data,
+  dataError,
 }: LibrariesProps) => {
+  if (data.length === 0 && dataError) {
+    return (
+      <Section className={styles.ic__libraries}>
+        <Container>
+          <DataErrorMessage />
+        </Container>
+      </Section>
+    )
+  }
   return (
     <Section className={styles.ic__libraries}>
       <Container>
@@ -73,159 +85,6 @@ const Libraries: FunctionComponent<LibrariesProps> = ({
               </Bubble>
             </SwiperSlide>
           ))}
-          {/* 
-          <SwiperSlide className={styles.ic__libraries__bubbleWrapper}>
-            <Bubble color={BUBBLE_COLOR_SECONDARY}>
-              <Image
-                src='/assets/icons/libraries/auth0-icon.svg'
-                alt=''
-                layout='fill'
-                objectFit='contain'
-              />
-            </Bubble>
-          </SwiperSlide>
-
-          <SwiperSlide className={styles.ic__libraries__bubbleWrapper}>
-            <Bubble color={BUBBLE_COLOR_SECONDARY} size={BUBBLE_SIZE_LARGE}>
-              <Image
-                src='/assets/icons/libraries/bootstrap.svg'
-                alt=''
-                layout='fill'
-                objectFit='contain'
-              />
-            </Bubble>
-          </SwiperSlide>
-          <SwiperSlide className={styles.ic__libraries__bubbleWrapper}>
-            <Bubble>
-              <Image
-                src='/assets/icons/libraries/cypress.png'
-                alt=''
-                layout='fill'
-                objectFit='contain'
-              />
-            </Bubble>
-          </SwiperSlide>
-          <SwiperSlide className={styles.ic__libraries__bubbleWrapper}>
-            <Bubble>
-              <Image
-                src='/assets/icons/libraries/google-analytics-4.svg'
-                alt=''
-                layout='fill'
-                objectFit='contain'
-              />
-            </Bubble>
-          </SwiperSlide>
-          <SwiperSlide className={styles.ic__libraries__bubbleWrapper}>
-            <Bubble>
-              <Image
-                src='/assets/icons/libraries/google-tag-manager.svg'
-                alt=''
-                layout='fill'
-                objectFit='contain'
-              />
-            </Bubble>
-          </SwiperSlide>
-          <SwiperSlide className={styles.ic__libraries__bubbleWrapper}>
-            <Bubble size={BUBBLE_SIZE_LARGE}>
-              <Image
-                src='/assets/icons/libraries/gsap-greensock.svg'
-                alt=''
-                layout='fill'
-                objectFit='contain'
-              />
-            </Bubble>
-          </SwiperSlide>
-          <SwiperSlide className={styles.ic__libraries__bubbleWrapper}>
-            <Bubble color={BUBBLE_COLOR_SECONDARY}>
-              <Image
-                src='/assets/icons/libraries/lottie.webp'
-                alt=''
-                layout='fill'
-                objectFit='contain'
-              />
-            </Bubble>
-          </SwiperSlide>
-          <SwiperSlide className={styles.ic__libraries__bubbleWrapper}>
-            <Bubble>
-              <Image
-                src='/assets/icons/libraries/mailchimp.png'
-                alt=''
-                layout='fill'
-                objectFit='contain'
-              />
-            </Bubble>
-          </SwiperSlide>
-          <SwiperSlide className={styles.ic__libraries__bubbleWrapper}>
-            <Bubble color={BUBBLE_COLOR_SECONDARY}>
-              <Image
-                src='/assets/icons/libraries/mixpanel.svg'
-                alt=''
-                layout='fill'
-                objectFit='contain'
-              />
-            </Bubble>
-          </SwiperSlide>
-          <SwiperSlide className={styles.ic__libraries__bubbleWrapper}>
-            <Bubble color={BUBBLE_COLOR_SECONDARY}>
-              <Image
-                src='/assets/icons/libraries/sass.svg'
-                alt=''
-                layout='fill'
-                objectFit='contain'
-              />
-            </Bubble>
-          </SwiperSlide>
-          <SwiperSlide className={styles.ic__libraries__bubbleWrapper}>
-            <Bubble color={BUBBLE_COLOR_SECONDARY}>
-              <Image
-                src='/assets/icons/libraries/react-i18n.png'
-                alt=''
-                layout='fill'
-                objectFit='contain'
-              />
-            </Bubble>
-          </SwiperSlide>
-
-          <SwiperSlide className={styles.ic__libraries__bubbleWrapper}>
-            <Bubble color={BUBBLE_COLOR_SECONDARY}>
-              <Image
-                src='/assets/icons/libraries/strapi.svg'
-                alt=''
-                layout='fill'
-                objectFit='contain'
-              />
-            </Bubble>
-          </SwiperSlide>
-          <SwiperSlide className={styles.ic__libraries__bubbleWrapper}>
-            <Bubble color={BUBBLE_COLOR_SECONDARY} size={BUBBLE_SIZE_LARGE}>
-              <Image
-                src='/assets/icons/libraries/graphql.svg'
-                alt=''
-                layout='fill'
-                objectFit='contain'
-              />
-            </Bubble>
-          </SwiperSlide>
-          <SwiperSlide className={styles.ic__libraries__bubbleWrapper}>
-            <Bubble>
-              <Image
-                src='/assets/icons/libraries/styled-components.png'
-                alt=''
-                layout='fill'
-                objectFit='contain'
-              />
-            </Bubble>
-          </SwiperSlide>
-          <SwiperSlide className={styles.ic__libraries__bubbleWrapper}>
-            <Bubble size={BUBBLE_SIZE_LARGE} color={BUBBLE_COLOR_SECONDARY}>
-              <Image
-                src='/assets/icons/libraries/swiper.svg'
-                alt=''
-                layout='fill'
-                objectFit='contain'
-              />
-            </Bubble>
-          </SwiperSlide> */}
         </Swiper>
       </Container>
     </Section>
